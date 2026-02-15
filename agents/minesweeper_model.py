@@ -13,7 +13,7 @@ from transformers import AutoModelForCausalLM, AutoTokenizer
 
 class MinesweeperAgent(object):
     def __init__(self, **kwargs):
-        model_name = "/workspace/your_finetuned_model"
+        model_name = "/workspace/your_finetuned_model_v2"
 
         self.tokenizer = AutoTokenizer.from_pretrained(model_name, padding_side="left")
         self.model = AutoModelForCausalLM.from_pretrained(
@@ -31,8 +31,8 @@ class MinesweeperAgent(object):
         """
         if system_prompt is None:
             system_prompt = (
-                'You are an expert Minesweeper AI. '
-                'Analyze constraints and output ONLY a valid JSON action. No explanation.'
+                'You are a Minesweeper AI. '
+                'Output ONLY valid JSON: {"type":"reveal"|"flag","row":R,"col":C}'
             )
 
         if isinstance(message, str):

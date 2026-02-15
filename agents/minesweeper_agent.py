@@ -34,8 +34,8 @@ class MinesweeperPlayer:
             (prompt, system_prompt)
         """
         sys_prompt = (
-            'You are an expert Minesweeper AI. '
-            'Analyze constraints and output ONLY a valid JSON action. No explanation.'
+            'You are a Minesweeper AI. '
+            'Output ONLY valid JSON: {"type":"reveal"|"flag","row":R,"col":C}'
         )
 
         # Strip internal metadata keys (prefixed with _)
