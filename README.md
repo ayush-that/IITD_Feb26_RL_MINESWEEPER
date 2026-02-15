@@ -7,9 +7,11 @@ A Reinforcement Learning project for training LLMs to play Minesweeper using GRP
 This project trains language models to play Minesweeper through a novel approach combining:
 
 - **3-Tier Constraint Satisfaction Solver** - Generates optimal move labels and computes cell probabilities
-- **GRPO Training** - Reinforcement learning from LLM-generated game trajectories  
+- **GRPO Training** - Reinforcement learning from LLM-generated game trajectories
 - **Size-Adaptive Prompting** - Compact grid format for small boards, frontier sparse format for large boards
 - **Multi-Stage Training Pipeline** - SFT → GRPO → Continued Training
+
+![Training Pipeline](training-pipeline.png)
 
 ## Project Structure
 
@@ -69,14 +71,18 @@ python eval_final.py --model grpo_checkpoint/ --num-games 100
 python agents/minesweeper_agent.py --game-state state.json --config config.yaml
 ```
 
+![Agent Flow](agent-flow.png)
+
 ## The Solver
 
 A 3-tier constraint satisfaction solver used for ground-truth labels and reward computation:
 
+![Solver Architecture](solver-architecture.png)
+
 **Tier 1**: Single-cell constraint propagation
 - Deduce mines/safes from immediate neighbors
 
-**Tier 2**: Set-based coupled constraints  
+**Tier 2**: Set-based coupled constraints
 - Subset reduction for coupled cells
 
 **Tier 3**: Tank solver (backtracking enumeration)
@@ -107,6 +113,8 @@ Rewards are computed based on:
 When `use_frontier=True`, the model is scored on:
 - Whether a move is deducible from constraints
 - Comparison against optimal solver moves
+
+![GRPO Training](grpo-training.png)
 
 ## Configuration
 
